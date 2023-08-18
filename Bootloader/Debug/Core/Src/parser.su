@@ -1,0 +1,2 @@
+../Core/Src/parser.c:4:11:parseMessage	16	static
+../Core/Src/parser.c:34:6:prepareResponse	24	static

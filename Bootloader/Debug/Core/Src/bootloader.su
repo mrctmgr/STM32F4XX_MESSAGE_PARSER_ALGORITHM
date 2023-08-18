@@ -1,0 +1,5 @@
+../Core/Src/bootloader.c:13:6:jumpApp	16	static,ignoring_inline_asm
+../Core/Src/bootloader.c:32:6:flashErase	40	static
+../Core/Src/bootloader.c:48:6:flashWrite	24	static
+../Core/Src/bootloader.c:57:11:flashRead	4	static
+../Core/Src/bootloader.c:62:10:GetFlashSector	16	static

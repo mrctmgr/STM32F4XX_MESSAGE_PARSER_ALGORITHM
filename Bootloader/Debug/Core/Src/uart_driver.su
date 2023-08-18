@@ -1,0 +1,7 @@
+../Core/Src/uart_driver.c:7:6:UART_Init	8	static
+../Core/Src/uart_driver.c:30:6:USART_SendByte	16	static
+../Core/Src/uart_driver.c:35:9:USART_IsBuffEmpty	16	static
+../Core/Src/uart_driver.c:40:9:USART_ReadByte	16	static
+../Core/Src/uart_driver.c:51:10:USART_BytesToRead	4	static
+../Core/Src/uart_driver.c:56:6:USART_SendByteArray	16	static
+../Core/Src/uart_driver.c:61:6:HAL_UART_RxCpltCallback	16	static

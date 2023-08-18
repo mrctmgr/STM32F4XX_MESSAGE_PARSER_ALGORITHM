@@ -1,0 +1,5 @@
+../Core/Src/bootloader.c:13:6:jumpApp	1
+../Core/Src/bootloader.c:32:6:flashErase	1
+../Core/Src/bootloader.c:48:6:flashWrite	1
+../Core/Src/bootloader.c:57:11:flashRead	1
+../Core/Src/bootloader.c:62:10:GetFlashSector	1
