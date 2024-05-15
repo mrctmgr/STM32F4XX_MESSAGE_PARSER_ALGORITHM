@@ -69,17 +69,14 @@ void processReceivedMessage(void);
 // Handle received USART data
 /*void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart == &huart2) {
-        // Process received message
         processReceivedMessage();
-
-        // Continue listening for new messages
         usart_receive();
     }
 }
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart == &huart2) {
-        usart_receive(); // Örnek olarak usart_receive() fonksiyonunu çağırıyoruz.
+        usart_receive();
     }
 }*/
 
