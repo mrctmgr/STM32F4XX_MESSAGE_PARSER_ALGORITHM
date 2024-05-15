@@ -126,32 +126,17 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  if (USART_BytesToRead() >= MESSAGE_LENGTH) {
-	      // Eğer seri iletişimde beklenen mesaj uzunluğuna kadar (MESSAGE_LENGTH) byte gelmişse
-	      // Bu blok çalıştırılacak
 
-	      // Gelen byte'ları okuyarak mesajı oku ve çözümle (parse)
 	      for (int i = 0; i < MESSAGE_LENGTH; i++) {
 	          receivedMessageBuffer[i] = (char)USART_ReadByte();
 	      }
-
-	      // Mesajı çözümle ve çözümlenmiş mesajı receivedMessage yapısına depola
 	      ErrorCode parseResult = parseMessage(receivedMessageBuffer, &receivedMessage);
 
 	      if (parseResult == NO_ERROR) {
-	          // Eğer mesaj çözümlemesi hatasız olduysa
-
-	          // Çözümlenen mesaja göre yanıt (response) hazırla
 	          prepareResponse(&receivedMessage, &responseMessage, responseData);
-
-	          // Yanıt (response) mesajına göre LED'leri ayarla (kontrol et)
 	          adjustLED(&responseMessage);
-
-	          // Yanıt (response) mesajını seri iletişim aracılığıyla gönder
 	          USART_SendByteArray((uint8_t *)&responseMessage, sizeof(responseMessage));
-	      } else {
-	          // Eğer mesaj çözümlemesi bir hatayla sonuçlandıysa
-	          // Burada gerekli hata işleme adımlarını ekleyebilirsiniz
-	      }
+	      } 
 	  }
 
   }
