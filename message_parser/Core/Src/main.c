@@ -79,8 +79,6 @@ void processReceivedMessage(void);
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart == &huart2) {
-        // Burada veri gönderimi tamamlandığında yapılacak işlemleri gerçekleştirebilirsiniz.
-        // Örneğin, yeni bir mesajı alma işlemine başlayabilirsiniz.
         usart_receive(); // Örnek olarak usart_receive() fonksiyonunu çağırıyoruz.
     }
 }*/
