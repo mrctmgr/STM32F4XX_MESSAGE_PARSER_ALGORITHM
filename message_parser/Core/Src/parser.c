@@ -1,9 +1,8 @@
 #include "parser.h"
 
-// Gelen mesajı çözümleme işlevi
 ErrorCode parseMessage(const char *message, Message *parsedMessage) {
     if (message[0] != START_CHAR) {
-        return INVALID_START; // Başlangıç karakteri kontrolü
+        return INVALID_START;
     }
 
     // Mesajın farklı bölümlerini çözümle ve parsedMessage yapısına doldur
@@ -13,7 +12,6 @@ ErrorCode parseMessage(const char *message, Message *parsedMessage) {
     parsedMessage->komut = *((status*)(message + 15)) % 2; // 1 byte: Komut
     parsedMessage->dataType = *((DataType*)(message + 17)) % 3; // 1 byte: Veri Türü
 
-    // Veri türüne göre farklı veri alanlarını çözümle
     switch (parsedMessage->dataType) {
         case CHAR:
             strncpy(parsedMessage->data.charData, message + 19, sizeof(parsedMessage->data.charData));
@@ -30,9 +28,7 @@ ErrorCode parseMessage(const char *message, Message *parsedMessage) {
     return NO_ERROR; // Hata yok
 }
 
-// Yanıt hazırlama işlevi
 void prepareResponse(Message *parsedMessage, Message *responseMessage, int responseData) {
-    // Gelen mesajın bazı alanlarını yanıt mesajına taşı
     responseMessage->emirNumarasi = parsedMessage->emirNumarasi;
     responseMessage->slaveNo = parsedMessage->slaveNo;
     responseMessage->emirAdresi = parsedMessage->emirAdresi;
