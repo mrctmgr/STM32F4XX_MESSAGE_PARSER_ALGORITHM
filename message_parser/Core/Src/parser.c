@@ -5,7 +5,6 @@ ErrorCode parseMessage(const char *message, Message *parsedMessage) {
         return INVALID_START;
     }
 
-    // Mesajın farklı bölümlerini çözümle ve parsedMessage yapısına doldur
     parsedMessage->emirNumarasi = *((uint16_t*)(message + 1)); // 2 byte: Emir Numarası
     parsedMessage->slaveNo = *((uint8_t*)(message + 5)); // 1 byte: Cihaz Numarası
     parsedMessage->emirAdresi = *((uint32_t*)(message + 7)); // 4 byte: Emir Adresi
@@ -33,7 +32,6 @@ void prepareResponse(Message *parsedMessage, Message *responseMessage, int respo
     responseMessage->slaveNo = parsedMessage->slaveNo;
     responseMessage->emirAdresi = parsedMessage->emirAdresi;
 
-    // Okuma veya yazma komutuna göre farklı yanıt hazırla
     if (parsedMessage->komut == READ_COMMAND) {
         responseMessage->komut = READ_COMMAND; // Okuma komutu
         responseMessage->dataType = parsedMessage->dataType; // Veri türü
@@ -65,7 +63,6 @@ void prepareResponse(Message *parsedMessage, Message *responseMessage, int respo
                 responseMessage->data.intData = parsedMessage->data.intData;
                 break;
             default:
-                // Geçersiz veri türü işleme alınabilir
                 break;
         }
     }
