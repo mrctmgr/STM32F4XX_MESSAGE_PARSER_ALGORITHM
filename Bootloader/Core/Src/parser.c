@@ -28,14 +28,13 @@ ErrorCode parseMessage(const char *message, Message *parsedMessage) {
 }
 
 void prepareResponse(Message *parsedMessage, Message *responseMessage, int responseData) {
-    // Gelen mesajın bazı alanlarını yanıt mesajına taşı
     responseMessage->emirNumarasi = parsedMessage->emirNumarasi;
     responseMessage->slaveNo = parsedMessage->slaveNo;
     responseMessage->emirAdresi = parsedMessage->emirAdresi;
 
     if (parsedMessage->komut == READ_COMMAND) {
-        responseMessage->komut = READ_COMMAND; // Okuma komutu
-        responseMessage->dataType = parsedMessage->dataType; // Veri türü
+        responseMessage->komut = READ_COMMAND;
+        responseMessage->dataType = parsedMessage->dataType;
         switch (parsedMessage->dataType) {
             case CHAR:
                 strncpy(responseMessage->data.charData, parsedMessage->data.charData, sizeof(responseMessage->data.charData));
@@ -44,15 +43,14 @@ void prepareResponse(Message *parsedMessage, Message *responseMessage, int respo
                 responseMessage->data.floatData = parsedMessage->data.floatData;
                 break;
             case INT:
-                responseMessage->data.intData = responseData; // İlgili veriyi ekle
+                responseMessage->data.intData = responseData;
                 break;
             default:
-                // Geçersiz veri türü işleme alınabilir
                 break;
         }
     } else if (parsedMessage->komut == WRITE_COMMAND) {
-        responseMessage->komut = WRITE_COMMAND; // Yazma komutu
-        responseMessage->dataType = parsedMessage->dataType; // Veri türü (yazma komutunda da aynı kalır)
+        responseMessage->komut = WRITE_COMMAND;
+        responseMessage->dataType = parsedMessage->dataType;
         switch (parsedMessage->dataType) {
             case CHAR:
                 strncpy(responseMessage->data.charData, parsedMessage->data.charData, sizeof(responseMessage->data.charData));
