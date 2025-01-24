@@ -2,23 +2,19 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-// Ardışık çarpım aralığını bulan fonksiyon
 uint64_t *findMaxProduct(const uint8_t* arr, int size, int productRange, int* startIndex) {
     uint64_t maxProduct = 0;
     uint64_t *temp = (uint64_t *)malloc(sizeof(uint64_t) * 2);
     *startIndex = 0;
     int attempts;
 
-    // Tüm elemanları gezerek en büyük çarpımı arar
     for (int i = 0; i <= size - productRange; ++i) {
         uint64_t product = 1;
 
-        // Belirtilen aralıktaki elemanları çarpar
         for (int j = i; j < i + productRange; ++j) {
             product *= arr[j];
         }
 
-        // Eğer bu çarpım daha büyükse, güncelle
         if (product > maxProduct) {
             maxProduct = product;
             *startIndex = i;
@@ -26,7 +22,6 @@ uint64_t *findMaxProduct(const uint8_t* arr, int size, int productRange, int* st
     }
     attempts = *startIndex + productRange;
 
-    // En büyük çarpım ve deneme sayısını geri döndür
     temp[0] = maxProduct;
     temp[1] = attempts;
     return temp;
@@ -67,7 +62,6 @@ uint8_t buffer[1000]={
     temp = (uint64_t *)malloc(sizeof(uint64_t) * 2);
     temp = findMaxProduct(buffer, size, productRange, &startIndex);
 
-    // Çıktıları yazdır
     printf("@Adi: Miraç\n@Soyadi: Tümgör\n@Tarih: 17.08.2023\n");
     printf("@Ciktilar: %d ardisik carpim sonucu = %llu ", productRange, temp[0]);
     printf("elemanlar baslangic %d'dan %d. elemana kadar %d denemede bulundu.\n",
