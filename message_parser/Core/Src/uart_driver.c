@@ -2,7 +2,7 @@
 
 extern UART_HandleTypeDef huart2;
 
-uartBufferT rxBuffer; // Alım tamponu
+uartBufferT rxBuffer;
 
 void UART_Init(void) {
     huart2.Init.BaudRate = 115200;
