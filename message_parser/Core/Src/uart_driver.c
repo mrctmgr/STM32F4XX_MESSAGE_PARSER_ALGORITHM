@@ -1,6 +1,6 @@
 #include "uart_driver.h"
 
-extern UART_HandleTypeDef huart2; // Kullandığınız UART periferine göre değiştirin
+extern UART_HandleTypeDef huart2;
 
 uartBufferT rxBuffer; // Alım tamponu
 
@@ -15,12 +15,12 @@ void UART_Init(void) {
 
     HAL_UART_Init(&huart2);
 
-    rxBuffer.buffer = malloc(RX_BUFFER_SIZE + 1); // RX_BUFFER_SIZE ihtiyaca göre tanımlanır
+    rxBuffer.buffer = malloc(RX_BUFFER_SIZE + 1);
     rxBuffer.size = RX_BUFFER_SIZE;
     rxBuffer.head = 0;
     rxBuffer.tail = 0;
     rxBuffer.count = 0;
-    HAL_UART_Receive_IT(&huart2, &rxBuffer.buffer[rxBuffer.tail], 1); // Alım kesmesini başlat
+    HAL_UART_Receive_IT(&huart2, &rxBuffer.buffer[rxBuffer.tail], 1);
 }
 
 void USART_SendByte(uint8_t data) {
@@ -52,11 +52,11 @@ void USART_SendByteArray(uint8_t* buffer, uint32_t size) {
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart == &huart2) {
         if (rxBuffer.count < rxBuffer.size) {
-            rxBuffer.buffer[rxBuffer.tail] = rxBuffer.buffer[rxBuffer.head]; // Alınan veriyi kopyala
-            rxBuffer.head = (rxBuffer.head + 1) % rxBuffer.size; // Başlangıç indeksini taşı
-            rxBuffer.tail = (rxBuffer.tail + 1) % rxBuffer.size; // Bitiş indeksini taşı
+            rxBuffer.buffer[rxBuffer.tail] = rxBuffer.buffer[rxBuffer.head];
+            rxBuffer.head = (rxBuffer.head + 1) % rxBuffer.size; 
+            rxBuffer.tail = (rxBuffer.tail + 1) % rxBuffer.size; 
             rxBuffer.count++; // Tampon sayısını artır
         }
-        HAL_UART_Receive_IT(huart, &rxBuffer.buffer[rxBuffer.tail], 1); // Sonraki karakteri dinlemeye başla
+        HAL_UART_Receive_IT(huart, &rxBuffer.buffer[rxBuffer.tail], 1);
     }
 }
