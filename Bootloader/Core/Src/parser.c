@@ -27,14 +27,12 @@ ErrorCode parseMessage(const char *message, Message *parsedMessage) {
     return NO_ERROR; // Hata yok
 }
 
-// Yanıt hazırlama işlevi
 void prepareResponse(Message *parsedMessage, Message *responseMessage, int responseData) {
     // Gelen mesajın bazı alanlarını yanıt mesajına taşı
     responseMessage->emirNumarasi = parsedMessage->emirNumarasi;
     responseMessage->slaveNo = parsedMessage->slaveNo;
     responseMessage->emirAdresi = parsedMessage->emirAdresi;
 
-    // Okuma veya yazma komutuna göre farklı yanıt hazırla
     if (parsedMessage->komut == READ_COMMAND) {
         responseMessage->komut = READ_COMMAND; // Okuma komutu
         responseMessage->dataType = parsedMessage->dataType; // Veri türü
@@ -66,7 +64,6 @@ void prepareResponse(Message *parsedMessage, Message *responseMessage, int respo
                 responseMessage->data.intData = parsedMessage->data.intData;
                 break;
             default:
-                // Geçersiz veri türü işleme alınabilir
                 break;
         }
     }
